@@ -47,21 +47,31 @@ function Game() {
     const marks = score[key];
     let result = [];
     let group = "";
+    let count = 0;
+
     for (let i = 1; i <= marks; i++) {
-      group += "|";
-      if (i % 5 === 0) {
+      if (count < 4) {
+        // Build up groups of four
+        group += "|";
+        count++;
+      } else {
+        // After four, add the fifth as a diagonal strike-through
         result.push(
-          <span style={{ textDecoration: "line-through" }} key={i - 5}>
+          <span style={{ textDecoration: "line-through" }}>
             {group}
           </span>
         );
-        result.push(" ");
-        group = "";
+        result.push(" "); // Add space after the striked group
+        group = ""; // Reset for next group
+        count = 0; // Reset count
       }
     }
-    if (group.length > 0) {
+
+    // If there are less than five bars left over, add them without line-through
+    if (count > 0 && group.length > 0) {
       result.push(group);
     }
+
     return <div>{result}</div>;
   }
 
