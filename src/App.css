@@ -176,13 +176,11 @@
     color: blue;
     background-color: #94a1e7;
     border-color: blue;
-    font-weight: bold;
   }
   50% {
     color: #fff;
     background-color: transparent;
     border-color: #fff;
-    font-weight: normal;
   }
 }
 
