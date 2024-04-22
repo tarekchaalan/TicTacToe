@@ -1,38 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+
+/* Global */
 .App {
-  text-align: center;
+  font-family: "Permanent Marker", cursive;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  grid-template-rows: auto 1fr auto;
+  height: 100vh;
+  background-color: #3c3c3c;
+  color: #fff;
+  gap: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Headers */
+.game-info {
+  display: flex;
+  justify-content: space-between; /* Ensures elements are spaced out to the container's edges */
+  align-items: center;
+  width: 100%; /* Use the full width of the parent container */
+  padding: 0 10%; /* Maintain padding on the sides */
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.game {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+/* Tally */
+.tally {
+  flex: 1; /* Allows each tally to grow but with equal distribution */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center tally vertically and horizontally */
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.tally.x,
+.tally.o {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24px;
+}
+
+.tally-marks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start; /* Aligns content to the top */
+  justify-content: center; /* Centers the tally marks */
+  width: 100%; /* Takes full width of the parent */
+  margin-top: 10px; /* Adds space between the header and marks */
+}
+
+.numeric-score {
+  font-family: Arial, sans-serif; /* Standard font for numeric display */
+  font-size: 0.5em; /* Smaller size */
+  font-weight: lighter;
+  color: #ddd; /* Subtle color difference */
+  margin-left: 5px; /* Spacing between the header and the numeric score */
+}
+
+/* Adjust .tally to better accommodate inline numeric scores */
+.tally h2 {
+  display: flex; /* Allows inline layout of header and numeric score */
+  align-items: center; /* Vertically centers the text and numeric score */
+  justify-content: center; /* Centers the content if necessary */
+  font-size: 24px; /* Adjusted for consistency */
+}
+
+/* Board */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  width: 33vw;
+  height: 33vw;
+}
+
+.board-row {
+  display: flex;
+  position: relative;
+}
+
+.square {
+  width: 100%;
+  height: 100%;
+  font-size: 5vw; /* Adjust based on your layout needs */
+  font-family: "Permanent Marker", cursive;
+  display: flex;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  background: transparent;
+  border-right: 2px solid rgba(255, 255, 255, 1);
+  border-bottom: 2px solid rgba(255, 255, 255, 1);
+}
+
+.square:nth-child(3n) {
+  border-right: none;
+}
+
+/* Remove bottom border for the last row */
+.square:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.status {
+  flex: 0 1 auto; /* Flex-grow is 0, flex-shrink is 1 and flex-basis is auto */
+  text-align: center; /* Ensure the status is centered */
+  padding: 0 20px; /* Add padding to prevent text from touching the tallies */
+  min-width: 120px; /* Minimum width to prevent squeezing */
+  white-space: nowrap; /* Prevents the text from wrapping */
+  font-size: 24px;
+}
+
+/* Buttons */
+.buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.status,
+.reset,
+.next {
+  font-size: calc(12px + 1vw); /* Responsive font size */
+}
+
+.reset,
+.next {
+  font-family: "Permanent Marker", cursive;
+  margin: 20px;
+  padding: 10px 20px;
+  font-size: 32px;
+  color: #fff;
+  background-color: transparent;
+  border: 2px solid #fff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.5s ease, border-color 0.5s ease,
+    color 0.5s ease;
+}
+
+.reset:hover {
+  color: red;
+  background-color: #e69a9a;
+  border-color: red;
+}
+
+.next:hover {
+  color: blue;
+  background-color: #94a1e7;
+  border-color: blue;
+  font-weight: bold;
+}
+
+@keyframes flash {
+  0%,
+  100% {
+    color: blue;
+    background-color: #94a1e7;
+    border-color: blue;
+    font-weight: bold;
   }
-  to {
-    transform: rotate(360deg);
+  50% {
+    color: #fff;
+    background-color: transparent;
+    border-color: #fff;
+    font-weight: normal;
   }
+}
+
+.flash-active {
+  animation: flash 1s infinite;
+}
+
+.highlight {
+  color: green;
+  border-radius: 0;
 }
