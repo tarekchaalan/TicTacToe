@@ -55,15 +55,12 @@ function Game() {
         group += "|";
         count++;
       } else {
-        // After four, add the fifth as a diagonal strike-through
         result.push(
-          <span style={{ textDecoration: "line-through" }}>
-            {group}
-          </span>
+          <span style={{ textDecoration: "line-through" }}>{group}</span>
         );
-        result.push(" "); // Add space after the striked group
-        group = ""; // Reset for next group
-        count = 0; // Reset count
+        result.push(" ");
+        group = "";
+        count = 0;
       }
     }
 
