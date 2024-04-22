@@ -49,18 +49,18 @@
 .tally-marks {
   display: flex;
   flex-wrap: wrap;
-  align-items: flex-start; /* Aligns content to the top */
-  justify-content: center; /* Centers the tally marks */
-  width: 100%; /* Takes full width of the parent */
-  margin-top: 10px; /* Adds space between the header and marks */
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  margin-top: 10px;
 }
 
 .numeric-score {
-  font-family: Arial, sans-serif; /* Standard font for numeric display */
-  font-size: 0.5em; /* Smaller size */
+  font-family: Arial, sans-serif;
+  font-size: 0.5em;
   font-weight: lighter;
-  color: #ddd; /* Subtle color difference */
-  margin-left: 5px; /* Spacing between the header and the numeric score */
+  color: #ddd;
+  margin-left: 5px;
 }
 
 /* Adjust .tally to better accommodate inline numeric scores */
@@ -80,6 +80,16 @@
   height: 33vw;
 }
 
+@media screen and (max-width: 768px) {
+  .board {
+    width: 80vw;
+    height: 80vw;
+  }
+  .App {
+    height: 90vh;
+  }
+}
+
 .board-row {
   display: flex;
   position: relative;
@@ -96,8 +106,8 @@
   align-items: center;
   color: #fff;
   background: transparent;
-  border-right: 2px solid rgba(255, 255, 255, 1);
-  border-bottom: 2px solid rgba(255, 255, 255, 1);
+  border-right: 4px solid rgba(255, 255, 255, 1);
+  border-bottom: 4px solid rgba(255, 255, 255, 1);
 }
 
 .square:nth-child(3n) {
@@ -125,18 +135,16 @@
   justify-content: center;
 }
 
-.status,
-.reset,
-.next {
+.status {
   font-size: calc(12px + 1vw); /* Responsive font size */
 }
 
 .reset,
 .next {
   font-family: "Permanent Marker", cursive;
-  margin: 20px;
   padding: 10px 20px;
-  font-size: 32px;
+  margin-bottom: 10px;
+  font-size: calc(12px + 1vw);
   color: #fff;
   background-color: transparent;
   border: 2px solid #fff;
