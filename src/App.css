@@ -1,15 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
 
+body {
+  font-family: "Permanent Marker", cursive;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-image: linear-gradient(
+      0deg,
+      rgba(255, 255, 255, 0.1),
+      rgba(255, 255, 255, 0.1)
+    ),
+    url(../public/images/background.png) !important;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #323232;
+  color: #fff;
+}
+
 /* Global */
 .App {
-  font-family: "Permanent Marker", cursive;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
-  background-color: #3c3c3c;
+  height: 100vh; /* Height will be controlled by the body */
   color: #fff;
   gap: 20px;
 }
@@ -36,6 +51,7 @@
   display: flex;
   flex-direction: column;
   align-items: center; /* Center tally vertically and horizontally */
+  font-size: 36px;
 }
 
 .tally.x,
@@ -43,7 +59,23 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  font-size: 24px;
+  height: 150px;
+}
+.tally.x,
+div,
+.tally.o,
+div {
+  font-size: 36px;
+}
+
+.tally.x,
+div {
+  margin-right: 10px;
+}
+
+.tally.y,
+div {
+  margin-left: 10px;
 }
 
 .tally-marks {
@@ -52,7 +84,6 @@
   align-items: flex-start;
   justify-content: center;
   width: 100%;
-  margin-top: 10px;
 }
 
 .numeric-score {
@@ -98,19 +129,6 @@
   background: transparent;
   border-right: 4px solid rgba(255, 255, 255, 1);
   border-bottom: 4px solid rgba(255, 255, 255, 1);
-}
-
-@media screen and (max-width: 768px) {
-  .board {
-    width: 80vw;
-    height: 80vw;
-  }
-  .App {
-    height: 90vh;
-  }
-  .square {
-    font-size: 8vw;
-  }
 }
 
 .square:nth-child(3n) {
@@ -191,4 +209,32 @@
 .highlight {
   color: green;
   border-radius: 0;
+}
+
+/* Small Changes for Responsiveness */
+@media screen and (max-width: 1024px) {
+  body {
+    min-height: 80vh;
+  }
+  .board {
+    width: 80vw;
+    height: 80vw;
+  }
+  .App {
+    height: 90vh;
+  }
+  .square {
+    font-size: 9vw;
+  }
+  .tally.x,
+  .tally.o {
+    height: 80px;
+  }
+
+  .tally.x,
+  div,
+  .tally.o,
+  div {
+    font-size: 4vw;
+  }
 }
