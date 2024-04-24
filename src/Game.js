@@ -1,4 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { PvPIcon, PvCIcon } from "./SVGs";
+import { findBestMove } from "./Minimax-Algorithm";
+
+// Tic Tac Toe Computer Algorithm Taken From:
+// https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/?ref=ml_lbp
+// Algorithm is unbeatable, you will only draw or lose against it
+// Can be found in the Minimax-Algorithm.js file
 
 function Game() {
   const [board, setBoard] = useState(Array(9).fill(null));
@@ -9,6 +16,23 @@ function Game() {
   const [isPvP, setIsPvP] = useState(true); // True if PvP, false if PvC
   const winInfo = calculateWinner(board);
   const winner = winInfo.winner;
+
+  useEffect(() => {
+    if (winner) {
+      setScore((prevScore) => ({
+        ...prevScore,
+        [winner]: prevScore[winner] + 1,
+      }));
+      setIsDraw(false);
+      setFlashActive(true);
+    } else if (!winner && board.every((cell) => cell !== null)) {
+      setIsDraw(true);
+      setFlashActive(true);
+    } else {
+      setIsDraw(false);
+      setFlashActive(false);
+    }
+  }, [board, winner]);
 
   useEffect(() => {
     if (!isPvP && !xIsNext && !winner && !isDraw) {
@@ -32,6 +56,8 @@ function Game() {
 
   const toggleGameMode = () => {
     setIsPvP(!isPvP);
+    setBoard(Array(9).fill(null));
+    setXIsNext(true);
   };
 
   function formatTally(key) {
@@ -42,6 +68,7 @@ function Game() {
 
     for (let i = 1; i <= marks; i++) {
       if (count < 4) {
+        // Build up groups of four
         group += "|";
         count++;
       } else {
@@ -49,26 +76,22 @@ function Game() {
           <span style={{ textDecoration: "line-through" }}>{group}</span>
         );
         result.push(" ");
-        group = "|";
-        count = 1;
+        group = "";
+        count = 0;
       }
     }
-    if (group.length > 0) {
+
+    // If there are less than five bars left over, add them without line-through
+    if (count > 0 && group.length > 0) {
       result.push(group);
     }
+
     return <div>{result}</div>;
   }
 
   return (
     <div className="App">
       <header className="game-info">
-        <div onClick={toggleGameMode} style={{ cursor: "pointer" }}>
-          {isPvP ? (
-            <img src="./svgs/PvP.svg" alt="PvP Mode" />
-          ) : (
-            <img src="./svgs/PvC.svg" alt="PvC Mode" />
-          )}
-        </div>
         <div className="tally x">
           <h2>
             X <span className="numeric-score">({score.X})</span>
@@ -99,6 +122,15 @@ function Game() {
             {value}
           </button>
         ))}
+      </div>
+      <div className="game-mode">
+        <div onClick={toggleGameMode} style={{ cursor: "pointer" }}>
+          {isPvP ? (
+            <PvPIcon style={{ width: "70px", height: "70px" }} />
+          ) : (
+            <PvCIcon style={{ width: "70px", height: "70px" }} />
+          )}
+        </div>
       </div>
       <div className="buttons">
         <button
@@ -144,88 +176,6 @@ function calculateWinner(squares) {
     }
   }
   return { winner: null, line: [] };
-}
-
-function findBestMove(board) {
-  let bestVal = -1000;
-  let bestMove = -1;
-  let tempBoard = [
-    [board[0], board[1], board[2]],
-    [board[3], board[4], board[5]],
-    [board[6], board[7], board[8]],
-  ];
-
-  for (let i = 0; i < 9; i++) {
-    if (board[i] === null) {
-      board[i] = "O";
-      let moveVal = minimax(tempBoard, 0, false);
-      board[i] = null;
-      if (moveVal > bestVal) {
-        bestMove = i;
-        bestVal = moveVal;
-      }
-    }
-  }
-  return bestMove;
-}
-
-function isMovesLeft(board) {
-  for (let i = 0; i < 9; i++) {
-    if (board[i] === null) return true;
-  }
-  return false;
-}
-
-function evaluate(board) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let line of lines) {
-    const [a, b, c] = line;
-    if (board[a] && board[a] === board[b] && board[a] === board[c]) {
-      if (board[a] === "X") {
-        return 10;
-      } else if (board[a] === "O") {
-        return -10;
-      }
-    }
-  }
-  return 0;
-}
-
-function minimax(board, depth, isMax) {
-  let score = evaluate(board);
-  if (score !== 0) return score;
-  if (!isMovesLeft(board)) return 0;
-
-  if (isMax) {
-    let best = -1000;
-    for (let i = 0; i < 9; i++) {
-      if (board[i] === null) {
-        board[i] = "X";
-        best = Math.max(best, minimax(board, depth + 1, !isMax));
-        board[i] = null;
-      }
-    }
-    return best;
-  } else {
-    let best = 1000;
-    for (let i = 0; i < 9; i++) {
-      if (board[i] === null) {
-        board[i] = "O";
-        best = Math.min(best, minimax(board, depth + 1, !isMax));
-        board[i] = null;
-      }
-    }
-    return best;
-  }
 }
 
 export default Game;

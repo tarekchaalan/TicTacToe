@@ -16,6 +16,7 @@ body {
   background-size: cover;
   background-color: #323232;
   color: #fff;
+  overflow-x: hidden;
 }
 
 /* Global */
@@ -23,7 +24,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 100vh; /* Height will be controlled by the body */
   color: #fff;
   gap: 20px;
@@ -36,6 +37,7 @@ body {
   align-items: center;
   width: 100%; /* Use the full width of the parent container */
   padding: 0 10%; /* Maintain padding on the sides */
+  margin-bottom: 20px;
 }
 
 .game {
@@ -60,12 +62,14 @@ body {
   flex-direction: column;
   align-items: center;
   height: 150px;
+  min-height: 150px;
 }
 .tally.x,
 div,
 .tally.o,
 div {
-  font-size: 36px;
+  font-size: 30px;
+  margin-bottom: auto;
 }
 
 .tally.x,
@@ -171,6 +175,7 @@ div {
   border: 2px solid #fff;
   border-radius: 10px;
   cursor: pointer;
+  animation: none;
   transition: background-color 0.5s ease, border-color 0.5s ease,
     color 0.5s ease;
 }
@@ -185,7 +190,7 @@ div {
   color: blue;
   background-color: #94a1e7;
   border-color: blue;
-  font-weight: bold;
+  animation: none;
 }
 
 @keyframes flash {
@@ -202,7 +207,7 @@ div {
   }
 }
 
-.flash-active {
+.next.flash-active:not(:hover) {
   animation: flash 1s infinite;
 }
 
