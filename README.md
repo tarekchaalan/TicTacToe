@@ -1,12 +1,10 @@
 # Tic Tac Toe
 
+### [For quick access, game is already hosted using Vercel](https://tic-tac-toe-zeta-two-20.vercel.app/)
+
 ### Running the Game
 
-#### 1. Setup:
-
-Make sure you have [Node.js](https://nodejs.org/) installed.
-
-#### 2. Installation:
+- Make sure you have [Node.js](https://nodejs.org/) installed.
 
 To install and run the game with one command, use:
 ```
