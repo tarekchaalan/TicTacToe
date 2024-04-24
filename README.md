@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Tic Tac Toe
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Running the Game
 
-## Available Scripts
+### 1. Setup:
 
-In the project directory, you can run:
+Make sure you have [Node.js](https://nodejs.org/) installed.
 
-### `npm start`
+### 2. Installation:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Clone the repository.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```bash
+git clone https://github.com/tarekchaalan/TicTacToe.git
+```
 
-### `npm test`
+    Open your terminal/cmd, navigate to the project directory using:
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```bash
+cd TicTacToe
+```
 
-### `npm run build`
+    Install Dependencies Using:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```bash
+npm install
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### 3. Start the Game:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    In the same directory, start the game by running:
 
-### `npm run eject`
+```bash
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+This will open the game in your default web browser in localhost.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Main Features
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Two Modes of Play:** Choose between Player vs. Player (PvP) and Player vs. Computer (PvC). The computer's moves are calculated using an unbeatable Minimax algorithm, source code taken from [here](https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/?ref=ml_lbp).
+- **Dynamic Score Tally:** Scores are updated with a visual representation using tally marks grouped in fives for easy reading, but I also included numeric values for easier reading.
+- **Interactive Board:** Click on any square to make a move. The game highlights the winning combination green if a player wins.
+- **Responsive Design:** The game layout adjusts to different screen sizes, ensuring a good playing experience on desktops, mobiles, and tablets.
+- **Flashy UI Elements:** Visual feedback through flashing effects when the round ends, indicating a win, loss, or draw.
+- **Easy Game Reset:** Buttons allow resetting the entire game or starting a new round without refreshing the browser.
