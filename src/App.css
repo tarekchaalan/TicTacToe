@@ -25,7 +25,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  height: 100vh; /* Height will be controlled by the body */
+  height: 100vh;
   color: #fff;
   gap: 20px;
 }
@@ -33,10 +33,10 @@ body {
 /* Headers */
 .game-info {
   display: flex;
-  justify-content: space-between; /* Ensures elements are spaced out to the container's edges */
+  justify-content: space-between; /* even spacing  */
   align-items: center;
-  width: 100%; /* Use the full width of the parent container */
-  padding: 0 10%; /* Maintain padding on the sides */
+  width: 100%;
+  padding: 0 10%;
   margin-bottom: 20px;
 }
 
@@ -49,10 +49,10 @@ body {
 
 /* Tally */
 .tally {
-  flex: 1; /* Allows each tally to grow but with equal distribution */
+  flex: 1; /* lets each tally grow but with equal distribution */
   display: flex;
   flex-direction: column;
-  align-items: center; /* Center tally vertically and horizontally */
+  align-items: center;
   font-size: 36px;
 }
 
@@ -98,12 +98,11 @@ div {
   margin-left: 5px;
 }
 
-/* Adjust .tally to better accommodate inline numeric scores */
 .tally h2 {
-  display: flex; /* Allows inline layout of header and numeric score */
-  align-items: center; /* Vertically centers the text and numeric score */
-  justify-content: center; /* Centers the content if necessary */
-  font-size: 24px; /* Adjusted for consistency */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
 }
 
 /* Board */
@@ -123,7 +122,7 @@ div {
 .square {
   width: 100%;
   height: 100%;
-  font-size: 5vw; /* Adjust based on your layout needs */
+  font-size: 5vw;
   font-family: "Permanent Marker", cursive;
   display: flex;
   border: none;
@@ -135,21 +134,20 @@ div {
   border-bottom: 4px solid rgba(255, 255, 255, 1);
 }
 
+/* Remove some borders */
 .square:nth-child(3n) {
   border-right: none;
 }
-
-/* Remove bottom border for the last row */
 .square:nth-last-child(-n + 3) {
   border-bottom: none;
 }
 
 .status {
-  flex: 0 1 auto; /* Flex-grow is 0, flex-shrink is 1 and flex-basis is auto */
-  text-align: center; /* Ensure the status is centered */
-  padding: 0 20px; /* Add padding to prevent text from touching the tallies */
-  min-width: 120px; /* Minimum width to prevent squeezing */
-  white-space: nowrap; /* Prevents the text from wrapping */
+  flex: 0 1 auto;
+  text-align: center;
+  padding: 0 20px;
+  min-width: 120px;
+  white-space: nowrap;
   font-size: 24px;
 }
 
@@ -161,7 +159,7 @@ div {
 }
 
 .status {
-  font-size: calc(12px + 1vw); /* Responsive font size */
+  font-size: calc(12px + 1vw);
 }
 
 .reset,
@@ -193,6 +191,7 @@ div {
   animation: none;
 }
 
+/* For flash feature when round ends */
 @keyframes flash {
   0%,
   100% {
@@ -206,7 +205,7 @@ div {
     border-color: #fff;
   }
 }
-
+/* keeps going till clicked - logic in Game.js */
 .next.flash-active:not(:hover) {
   animation: flash 1s infinite;
 }
