@@ -1,3 +1,10 @@
+// Modified slightly to work with my project
+
+// Tic Tac Toe Computer Algorithm Taken From:
+// https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/?ref=ml_lbp
+// Algorithm is unbeatable, you will only draw or lose against it
+// Can be found in the Minimax-Algorithm.js file
+
 export function findBestMove(board) {
   let bestVal = -Infinity;
   let bestMove = -1;

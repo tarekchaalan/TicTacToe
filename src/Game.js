@@ -1,22 +1,22 @@
+// Tarek Chaalan
+// Tic Tac Toe Game
+// cwid 885512020
+
 import React, { useState, useEffect } from "react";
 import { PvPIcon, PvCIcon } from "./SVGs";
 import { findBestMove } from "./Minimax-Algorithm";
 
-// Tic Tac Toe Computer Algorithm Taken From:
-// https://www.geeksforgeeks.org/finding-optimal-move-in-tic-tac-toe-using-minimax-algorithm-in-game-theory/?ref=ml_lbp
-// Algorithm is unbeatable, you will only draw or lose against it
-// Can be found in the Minimax-Algorithm.js file
-
 function Game() {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [xIsNext, setXIsNext] = useState(true);
+  const [board, setBoard] = useState(Array(9).fill(null)); // 9 cells
+  const [xIsNext, setXIsNext] = useState(true); // X goes first
   const [score, setScore] = useState({ X: 0, O: 0 });
-  const [isDraw, setIsDraw] = useState(false);
-  const [flashActive, setFlashActive] = useState(false);
-  const [isPvP, setIsPvP] = useState(true); // True if PvP, false if PvC
-  const winInfo = calculateWinner(board);
-  const winner = winInfo.winner;
+  const [isDraw, setIsDraw] = useState(false); // Draw state
+  const [flashActive, setFlashActive] = useState(false); // Flashing state
+  const [isPvP, setIsPvP] = useState(true); // Player vs Player [true] or Player vs Computer [false]
+  const winInfo = calculateWinner(board); // Check if there is a winner
+  const winner = winInfo.winner; // Winner
 
+  // Check if there is a winner or a draw
   useEffect(() => {
     if (winner) {
       setScore((prevScore) => ({
@@ -34,18 +34,23 @@ function Game() {
     }
   }, [board, winner]);
 
+  // Computer's turn
   useEffect(() => {
     if (!isPvP && !xIsNext && !winner && !isDraw) {
-      const move = findBestMove(board);
-      if (move != null) {
-        const newBoard = [...board];
-        newBoard[move] = "O";
-        setBoard(newBoard);
-        setXIsNext(true);
-      }
+      setTimeout(() => {
+        // Delay the AI's move to make it more realistic
+        const move = findBestMove(board);
+        if (move != null) {
+          const newBoard = [...board];
+          newBoard[move] = "O";
+          setBoard(newBoard);
+          setXIsNext(true);
+        }
+      }, 500); // .5 secs
     }
   }, [xIsNext, board, isPvP, winner, isDraw]);
 
+  // Handle player's turn
   const handleClick = (i) => {
     if (board[i] || winner) return;
     const newBoard = [...board];
@@ -54,12 +59,14 @@ function Game() {
     setXIsNext(!xIsNext);
   };
 
+  // Toggle between Player vs Player and Player vs Computer
   const toggleGameMode = () => {
     setIsPvP(!isPvP);
     setBoard(Array(9).fill(null));
     setXIsNext(true);
   };
 
+  // Format the tally as 4 bars and the fifth being the line-through
   function formatTally(key) {
     const marks = score[key];
     let result = [];
@@ -68,14 +75,14 @@ function Game() {
 
     for (let i = 1; i <= marks; i++) {
       if (count < 4) {
-        // Build up groups of four
+        // groups of four
         group += "|";
         count++;
       } else {
         result.push(
           <span style={{ textDecoration: "line-through" }}>{group}</span>
-        );
-        result.push(" ");
+        ); // line-through to simulate the fifth bar
+        result.push(" "); // space between groups
         group = "";
         count = 0;
       }
@@ -89,6 +96,32 @@ function Game() {
     return <div>{result}</div>;
   }
 
+  // Calculate the winner
+  function calculateWinner(squares) {
+    const lines = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (
+        squares[a] &&
+        squares[a] === squares[b] &&
+        squares[a] === squares[c]
+      ) {
+        return { winner: squares[a], line: lines[i] };
+      }
+    }
+    return { winner: null, line: [] };
+  }
+
+  // Render the game
   return (
     <div className="App">
       <header className="game-info">
@@ -156,26 +189,6 @@ function Game() {
       </div>
     </div>
   );
-}
-
-function calculateWinner(squares) {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return { winner: squares[a], line: lines[i] };
-    }
-  }
-  return { winner: null, line: [] };
 }
 
 export default Game;
