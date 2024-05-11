@@ -1,6 +1,6 @@
 // Tarek Chaalan
 // Tic Tac Toe Game
-// cwid 885512020
+// CWID 885512020
 
 import React, { useState, useEffect } from "react";
 import { PvPIcon, PvCIcon } from "./SVGs";
